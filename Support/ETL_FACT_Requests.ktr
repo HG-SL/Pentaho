@@ -500,18 +500,18 @@
   </connection>
   <order>
     <hop>
-      <from>Table input</from>
-      <to>Insert / update</to>
+      <from>Execute SQL script 2</from>
+      <to>Table input 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Execute SQL script</from>
-      <to>Table input</to>
+      <from>Table input 2</from>
+      <to>Insert / update 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Execute SQL script</name>
+    <name>Execute SQL script 2</name>
     <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
@@ -543,13 +543,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
-      <yloc>144</yloc>
+      <xloc>336</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Insert / update</name>
+    <name>Insert / update 2</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -632,6 +632,18 @@
         <name2/>
       </key>
       <key>
+        <name>Question_Date</name>
+        <field>Question_Date</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>Answer_Date</name>
+        <field>Answer_Date</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
         <name>First_Question_Date</name>
         <field>First_Question_Date</field>
         <condition>=</condition>
@@ -708,6 +720,16 @@
         <rename>Last_Question_Date</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>Question_Date</name>
+        <rename>Question_Date</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Answer_Date</name>
+        <rename>Answer_Date</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -718,13 +740,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>144</yloc>
+      <xloc>752</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Table input</name>
+    <name>Table input 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -739,9 +761,11 @@
 	prd.Product_Id,
 	cl.Client_Id,
 	qt.Question_Type,
-	qt.Question,  
+	qt.Question, 
+	qt.Question_Date, 
 	aw.Result As Answer,
 	aw.Qualification,
+	aw.Answer_Date,
 	MIN(qt.Question_Date) AS First_Question_Date,
 	MAX(qt.Question_Date) AS Last_Question_Date,
 	question_date.Sk_Dim_Time as Question_Date_Id,
@@ -809,6 +833,9 @@ GROUP BY
 	aw.Qualification, 
 	qt.Question,  
 	aw.Result,
+	aw.Qualification,
+	qt.Question_Date, 
+	aw.Answer_Date,
 	question_date.Sk_Dim_Time,
 	answer_date.Sk_Dim_Time,
 	st.SK_Dim_Status,
@@ -1130,8 +1157,8 @@ GROUP BY
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>144</yloc>
+      <xloc>512</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

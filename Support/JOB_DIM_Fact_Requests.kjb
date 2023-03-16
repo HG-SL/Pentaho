@@ -417,7 +417,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/ETL_DIM_TIEMPO.ktr</filename>
+      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_TIEMPO.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -468,7 +468,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/ETL_DIM_Client.ktr</filename>
+      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_Client.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -507,7 +507,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/ETL_DIM_Department.ktr</filename>
+      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_Department.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -546,7 +546,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/ETL_DIM_Employee.ktr</filename>
+      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/ETL_DIM_Employee.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -585,7 +585,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/ETL_DIM_Location.ktr</filename>
+      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_Location.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -624,7 +624,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/ETL_DIM_Organization.ktr</filename>
+      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_Organization.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -663,7 +663,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/ETL_DIM_Product.ktr</filename>
+      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_Product.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -702,7 +702,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/ETL_DIM_Status.ktr</filename>
+      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_Status.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -814,7 +814,7 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/Pentaho/Data Mart/Fact_Failure_Requests.ktr</filename>
+      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Data Mart/Fact_Failure_Requests.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -853,7 +853,7 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/Pentaho/Data Mart/Fact_Knowledge_Requests.ktr</filename>
+      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Data Mart/Fact_Knowledge_Requests.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
