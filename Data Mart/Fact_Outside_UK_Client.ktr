@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Fact_Sales</name>
+    <name>Fact_Web_Client_Channel</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,9 +427,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2023/03/02 22:39:42.671</created_date>
+    <created_date>2023/03/17 21:31:21.692</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2023/03/02 22:39:42.671</modified_date>
+    <modified_date>2023/03/17 21:31:21.692</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -526,7 +526,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DELETE FROM BI_DW.Fact_Sales</sql>
+    <sql>DELETE FROM BI_DM.Fact_Outside_UK_Customer ;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -543,8 +543,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
-      <yloc>160</yloc>
+      <xloc>373</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -563,116 +563,42 @@
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>BI_DW</schema>
-      <table>Fact_Sales</table>
-      <key>
-        <name>Product_Id</name>
-        <field>FK_Product_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
+      <schema>BI_DM</schema>
+      <table>Fact_Outside_UK_Customer</table>
       <key>
         <name>Client_Id</name>
-        <field>FK_Client_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Total_Amount</name>
-        <field>Total_Amount</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Contract_Description</name>
-        <field>Contract_Description</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Promo_Id</name>
-        <field>FK_Promotion_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Quantity_Products</name>
-        <field>Quantity_Products</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Sale_Date_Id</name>
-        <field>FK_Sale_Time</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Status_Id</name>
-        <field>FK_Status_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Location_Id</name>
-        <field>FK_Location_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Organization_Id</name>
-        <field>FK_Organization_Id</field>
+        <field>Client_Id</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>FK_Product_Id</name>
-        <rename>Product_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Client_Id</name>
+        <name>Client_Id</name>
         <rename>Client_Id</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>Total_Amount</name>
-        <rename>Total_Amount</rename>
+        <name>Client_Email</name>
+        <rename>Client_Email</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>Contract_Description</name>
-        <rename>Contract_Description</rename>
+        <name>Potential_Customer</name>
+        <rename>Potential_Customer</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>FK_Promotion_Id</name>
-        <rename>Promo_Id</rename>
+        <name>Country</name>
+        <rename>Country_Name</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>Quantity_Products</name>
-        <rename>Quantity_Products</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Sale_Time</name>
-        <rename>Sale_Date_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Status_Id</name>
-        <rename>Status_Id</rename>
+        <name>FK_Order_Id</name>
+        <rename>Order_Id</rename>
         <update>Y</update>
       </value>
       <value>
         <name>FK_Location_Id</name>
-        <rename>Location_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Organization_Id</name>
-        <rename>Organization_Id</rename>
+        <rename>Sk_Dim_Location</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -685,8 +611,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>832</xloc>
-      <yloc>160</yloc>
+      <xloc>837</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -702,60 +628,29 @@
       <schema_name/>
     </partitioning>
     <connection>sqlserver</connection>
-    <sql>SELECT 
-	prd.Product_Id,
-	bic.Client_Id,
-	bic.FK_Organization_Id AS Organization_Id,
-	op.Order_Date,
-	op.Total_Amount,
-	contract.Contract_Description,
-	op.Order_Id AS Order_number,
-	prd.FK_Promo_Id AS Promo_Id,
-	COUNT(op.FK_Product_Id) AS Quantity_Products,
-	Order_date.Sk_Dim_Time as Sale_Date_Id,
-	st.SK_Dim_Status as Status_Id,
-	lct.SK_Dim_Location AS Location_Id
-FROM 
-	BI.Order_Product op 
-INNER JOIN BI_DW.Dim_Client cl
-ON 
-	cl.SK_Dim_Client = op.FK_Client_Id 
-INNER JOIN BI.Client bic
-ON
-	bic.Client_Id = cl.SK_Dim_Client
-INNER JOIN BI_DW.Dim_Time Order_date 
-ON 
-	convert(date,op.Order_Date,102) = Order_date.Full_Date 
-INNER JOIN BI_DW.Dim_Status st
-ON 
-	op.FK_Status_Id = st.SK_Dim_Status
-INNER JOIN BI_DW.Dim_Location lct
-ON 
-	lct.FK_City = bic.FK_City_Id
-INNER JOIN BI.State ste
-ON 
-	ste.State_Id = lct.FK_State
-INNER JOIN BI.Country cty
-ON 
-	cty.Country_Id = lct.FK_Country
-INNER JOIN BI.Product prd
-ON 
-	prd.Product_Id = op.FK_Product_Id
-INNER JOIN BI.Contract contract
-ON 
-	contract.FK_Client_Id = bic.Client_Id
-GROUP BY 
-	prd.Product_Id,
-	bic.Client_Id,
-	bic.FK_Organization_Id,
+    <sql>SELECT  
+	cli.Client_Id, 
+	cli.Client_Email, 
+	cli.Potential_Customer, 
+	ct.Country_Name,
 	op.Order_Id,
-	op.Order_Date,
-	op.Total_Amount,
-	contract.Contract_Description,
-	Order_date.Sk_Dim_Time,
-	st.SK_Dim_Status,
-	lct.SK_Dim_Location,
-	prd.FK_Promo_Id</sql>
+	lt.Sk_Dim_Location
+FROM 
+	BI.Client cli
+	INNER JOIN BI.Order_Product op ON op.FK_Client_Id = cli.Client_Id
+	INNER JOIN BI_DW.Dim_Location lt ON lt.FK_City = cli.FK_City_Id
+	INNER JOIN BI.State st ON st.State_Id = lt.FK_State
+	INNER JOIN BI.Country ct ON ct.Country_Id = lt.FK_Country
+WHERE
+	ct.Country_Name NOT IN ('England','Scotland','Wales','Ireland')
+GROUP BY 
+	cli.Client_Id, 
+	cli.Client_Email, 
+	cli.Potential_Customer, 
+	op.Order_Id,
+	ct.Country_Name,
+	op.Order_Id,
+	lt.Sk_Dim_Location</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -763,29 +658,6 @@ GROUP BY
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Product_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>Product_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
@@ -810,36 +682,13 @@ GROUP BY
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>Organization_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>Organization_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>Order_Date</name>
-        <length>0</length>
+        <name>Client_Email</name>
+        <length>255</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>Order_Date</comments>
+        <comments>Client_Email</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -856,16 +705,16 @@ GROUP BY
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>BigNumber</type>
+        <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>Total_Amount</name>
-        <length>19</length>
-        <precision>4</precision>
+        <name>Potential_Customer</name>
+        <length>9</length>
+        <precision>0</precision>
         <origin>Table input</origin>
-        <comments>Total_Amount</comments>
-        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
+        <comments>Potential_Customer</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol/>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -881,11 +730,11 @@ GROUP BY
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>Contract_Description</name>
-        <length>1073741823</length>
+        <name>Country_Name</name>
+        <length>255</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>Contract_Description</comments>
+        <comments>Country_Name</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -904,11 +753,11 @@ GROUP BY
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>Order_number</name>
+        <name>Order_Id</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Table input</origin>
-        <comments>Order_number</comments>
+        <comments>Order_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -927,103 +776,11 @@ GROUP BY
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>Promo_Id</name>
+        <name>Sk_Dim_Location</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Table input</origin>
-        <comments>Promo_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Quantity_Products</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>Quantity_Products</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Sale_Date_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>Sale_Date_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Status_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>Status_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Location_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>Location_Id</comments>
+        <comments>Sk_Dim_Location</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1049,8 +806,8 @@ GROUP BY
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>160</yloc>
+      <xloc>581</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

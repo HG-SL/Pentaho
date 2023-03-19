@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Fact_Web_Client_Channel</name>
+    <name>ETL_DIM_Client</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,10 +427,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2023/03/17 21:31:21.692</created_date>
+    <created_date>2023/03/18 22:23:05.891</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2023/03/17 21:31:21.692</modified_date>
-    <key_for_session_key/>
+    <modified_date>2023/03/18 22:23:05.891</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -500,13 +500,23 @@
   </connection>
   <order>
     <hop>
-      <from>Execute SQL script</from>
-      <to>Table input</to>
+      <from>Insert / update</from>
+      <to>Execute SQL script</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input</from>
+      <to>Update</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Update</from>
       <to>Insert / update</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Execute SQL script 2</from>
+      <to>Table input</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -526,7 +536,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DELETE FROM BI_DM.Fact_Web_Client_Channel;</sql>
+    <sql>delete from BI_DW.Dim_Client where not exists (select Client_Id from BI.Client where Client_Id = SK_Dim_Client)</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -543,8 +553,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>373</xloc>
-      <yloc>256</yloc>
+      <xloc>977</xloc>
+      <yloc>149</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -563,16 +573,16 @@
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>BI_DM</schema>
-      <table>Fact_Web_Client_Channel</table>
+      <schema>BI_DW</schema>
+      <table>Dim_Client</table>
       <key>
         <name>Client_Id</name>
-        <field>Client_Id</field>
+        <field>SK_Dim_Client</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>Client_Id</name>
+        <name>SK_Dim_Client</name>
         <rename>Client_Id</rename>
         <update>Y</update>
       </value>
@@ -586,16 +596,6 @@
         <rename>Potential_Customer</rename>
         <update>Y</update>
       </value>
-      <value>
-        <name>Channel</name>
-        <rename>Channel</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Order_Id</name>
-        <rename>Order_Id</rename>
-        <update>Y</update>
-      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -606,8 +606,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>837</xloc>
-      <yloc>256</yloc>
+      <xloc>785</xloc>
+      <yloc>149</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -623,25 +623,25 @@
       <schema_name/>
     </partitioning>
     <connection>sqlserver</connection>
-    <sql>SELECT  
+    <sql>SELECT 
 	cli.Client_Id, 
 	cli.Client_Email, 
-	cli.Potential_Customer, 
-	qt.Channel,
-	op.Order_Id
+	cli.Potential_Customer
 FROM 
-	BI.Client cli
-	INNER JOIN BI.Question qt ON qt.FK_Client_Id = cli.Client_Id
-	INNER JOIN BI.Order_Product op ON op.FK_Client_Id = cli.Client_Id
-	INNER JOIN BI.Product pr ON pr.Product_Id = op.FK_Product_Id
-WHERE
-	qt.Channel = 'Website'
-GROUP BY 
-	cli.Client_Id, 
-	cli.Client_Email, 
-	cli.Potential_Customer, 
-	qt.Channel,
-	op.Order_Id</sql>
+	(SELECT 
+		Client_Id, 
+		Client_Email, 
+		Potential_Customer
+	FROM 
+		BI_DM.Fact_Outside_UK_Client
+	UNION
+	SELECT 
+		Client_Id, 
+		Client_Email, 
+		Potential_Customer
+	FROM 
+		BI_DM.Fact_UK_Client
+	) AS cli </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -718,52 +718,6 @@ GROUP BY
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>Channel</name>
-        <length>100</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>Channel</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Order_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>Order_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -774,8 +728,99 @@ GROUP BY
       </output>
     </remotesteps>
     <GUI>
-      <xloc>581</xloc>
-      <yloc>256</yloc>
+      <xloc>401</xloc>
+      <yloc>149</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Update</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>sqlserver</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>Y</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>BI_DW</schema>
+      <table>Dim_Client</table>
+      <key>
+        <name>Client_Id</name>
+        <field>SK_Dim_Client</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>SK_Dim_Client</name>
+        <rename>Client_Id</rename>
+      </value>
+      <value>
+        <name>Client_Email</name>
+        <rename>Client_Email</rename>
+      </value>
+      <value>
+        <name>Potential_Customer</name>
+        <rename>Potential_Customer</rename>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>593</xloc>
+      <yloc>149</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Execute SQL script 2</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>sqlserver</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DELETE FROM BI_DW.Dim_Client</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
