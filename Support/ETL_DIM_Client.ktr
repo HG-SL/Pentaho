@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ETL_FACT_Requests</name>
+    <name>ETL_DIM_Client</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,10 +427,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/11/28 18:54:56.234</created_date>
+    <created_date>2023/03/19 21:53:46.715</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/11/28 18:54:56.234</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2023/03/19 21:53:46.715</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -500,18 +500,28 @@
   </connection>
   <order>
     <hop>
-      <from>Execute SQL script 2</from>
-      <to>Table input 2</to>
+      <from>Insert / update</from>
+      <to>Execute SQL script</to>
       <enabled>N</enabled>
     </hop>
     <hop>
-      <from>Table input 2</from>
-      <to>Insert / update 2</to>
+      <from>Table input</from>
+      <to>Update</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Update</from>
+      <to>Insert / update</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Execute SQL script </from>
+      <to>Table input</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Execute SQL script 2</name>
+    <name>Execute SQL script</name>
     <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
@@ -521,12 +531,12 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>sqlserver</connection>
+    <connection/>
     <execute_each_row>N</execute_each_row>
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DELETE FROM BI_DW.Fact_Requests </sql>
+    <sql>delete from BI_DW.Dim_Client where not exists (select Client_Id from BI.Client where Client_Id = SK_Dim_Client)</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -543,13 +553,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>208</yloc>
+      <xloc>952</xloc>
+      <yloc>246</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Insert / update 2</name>
+    <name>Insert / update</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -564,170 +574,46 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>BI_DW</schema>
-      <table>Fact_Requests</table>
-      <key>
-        <name>Question_Type</name>
-        <field>Question_Type</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Question</name>
-        <field>Question</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Answer</name>
-        <field>Response</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Qualification</name>
-        <field>Qualification</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Question_Date_Id</name>
-        <field>FK_Question_Time</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Answer_Date_Id</name>
-        <field>FK_Response_Time</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Status_Id</name>
-        <field>FK_Status_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
+      <table>Dim_Client</table>
       <key>
         <name>Client_Id</name>
-        <field>FK_Client_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Location_Id</name>
-        <field>FK_Location_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Organization_Id</name>
-        <field>FK_Organization_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Product_Id</name>
-        <field>FK_Product_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Question_Date</name>
-        <field>Question_Date</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Answer_Date</name>
-        <field>Answer_Date</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>First_Question_Date</name>
-        <field>First_Question_Date</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Last_Question_Date</name>
-        <field>Last_Question_Date</field>
+        <field>SK_Dim_Client</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>Question_Type</name>
-        <rename>Question_Type</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Question</name>
-        <rename>Question</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Response</name>
-        <rename>Answer</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Qualification</name>
-        <rename>Qualification</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Question_Time</name>
-        <rename>Question_Date_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Response_Time</name>
-        <rename>Answer_Date_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Status_Id</name>
-        <rename>Status_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Client_Id</name>
+        <name>SK_Dim_Client</name>
         <rename>Client_Id</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>FK_Location_Id</name>
-        <rename>Location_Id</rename>
+        <name>Client_Name</name>
+        <rename>Client_Name</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>FK_Organization_Id</name>
-        <rename>Organization_Id</rename>
+        <name>Client_Family_Name</name>
+        <rename>Client_Family_Name</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>FK_Product_Id</name>
-        <rename>Product_Id</rename>
+        <name>Client_Telephone</name>
+        <rename>Client_Telephone</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>First_Question_Date</name>
-        <rename>First_Question_Date</rename>
+        <name>Client_Email</name>
+        <rename>Client_Email</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>Last_Question_Date</name>
-        <rename>Last_Question_Date</rename>
+        <name>User_Id</name>
+        <rename>User_Id</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>Question_Date</name>
-        <rename>Question_Date</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Answer_Date</name>
-        <rename>Answer_Date</rename>
+        <name>User_Agent</name>
+        <rename>User_Agent</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -740,13 +626,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>208</yloc>
+      <xloc>760</xloc>
+      <yloc>246</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Table input 2</name>
+    <name>Table input</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -758,92 +644,24 @@
     </partitioning>
     <connection>sqlserver</connection>
     <sql>SELECT 
-	prd.SK_Dim_Product AS Product_Id,
-	cl.SK_Dim_Client AS Client_Id,
-	qt.Question_Type,
-	qt.Question, 
-	qt.Question_Date, 
-	aw.Result As Answer,
-	aw.Qualification,
-	aw.Answer_Date,
-	MIN(qt.Question_Date) AS First_Question_Date,
-	MAX(qt.Question_Date) AS Last_Question_Date,
-	question_date.Sk_Dim_Time as Question_Date_Id,
-	answer_date.Sk_Dim_Time as Answer_Date_Id,
-	st.SK_Dim_Status as Status_Id,
-	lct.SK_Dim_Location AS Location_Id,
-	org.Organization_Id
+	cl.Client_Id, 
+	cl.Client_Name, 
+	cl.Client_Family_Name, 
+	cl.Client_Telephone, 
+	cl.Client_Email, 
+	cl.User_Id, 
+	cl.User_Agent 
 FROM 
-	(SELECT 
-		Question_Id,
-		Question, 
-		Question_Date, 
-		Question_Type, 
-		FK_Status_Id,
-		FK_Client_Id,
-		FK_Product_Id
-	FROM 
-		BI_DM.Fact_Failure_Requests
-	UNION
-	SELECT 
-		Question_Id,
-		Question, 
-		Question_Date, 
-		Question_Type, 
-		FK_Status_Id,
-		FK_Client_Id,
-		FK_Product_Id
-	FROM 
-		BI_DM.Fact_Knowledge_Requests
-	) AS qt 
-INNER JOIN BI.Answer aw 
-ON 
-	qt.Question_Id = aw.FK_Question_Id 
-INNER JOIN BI_DW.Dim_Time question_date 
-ON 
-	convert(date,qt.Question_Date,102) = question_date.Full_Date 
-INNER JOIN BI_DW.Dim_Time answer_date 
-ON 
-	convert(date,aw.Answer_Date,102) = answer_date.Full_Date 
-INNER JOIN BI_DW.Dim_Status st
-ON 
-	qt.FK_Status_Id = st.SK_Dim_Status
-INNER JOIN BI_DW.Dim_Client cl
-ON 
-	qt.FK_Client_Id = cl.SK_Dim_Client
-INNER JOIN BI.Client bic
-ON
-	bic.Client_Id = cl.SK_Dim_Client
-INNER JOIN BI_DW.Dim_Location lct
-ON 
-	lct.FK_City = bic.FK_City_Id
-INNER JOIN BI.State ste
-ON 
-	ste.State_Id = lct.FK_State
-INNER JOIN BI.Country cty
-ON 
-	cty.Country_Id = lct.FK_Country
-INNER JOIN BI.Organization org
-ON 
-	org.Organization_Id = bic.FK_Organization_Id
-INNER JOIN BI_DW.Dim_Product prd
-ON 
-	prd.SK_Dim_Product = qt.FK_Product_Id
+	BI.Client cl
+INNER JOIN BI.Question qt ON qt.FK_Client_Id = cl.Client_Id
 GROUP BY 
-	prd.SK_Dim_Product,
-	cl.SK_Dim_Client, 
-	qt.Question_Type,
-	aw.Qualification, 
-	qt.Question,  
-	aw.Result,
-	aw.Qualification,
-	qt.Question_Date, 
-	aw.Answer_Date,
-	question_date.Sk_Dim_Time,
-	answer_date.Sk_Dim_Time,
-	st.SK_Dim_Status,
-	lct.SK_Dim_Location,
-	org.Organization_Id</sql>
+	cl.Client_Id, 
+	cl.Client_Name, 
+	cl.Client_Family_Name, 
+	cl.Client_Telephone, 
+	cl.Client_Email, 
+	cl.User_Id, 
+	cl.User_Agent </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -854,34 +672,11 @@ GROUP BY
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>Product_Id</name>
+        <name>Client_Id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>Product_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>SK_Dim_Client</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>SK_Dim_Client</comments>
+        <origin>Table input</origin>
+        <comments>Client_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -900,11 +695,11 @@ GROUP BY
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>Question_Type</name>
+        <name>Client_Name</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>Question_Type</comments>
+        <origin>Table input</origin>
+        <comments>Client_Name</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -923,34 +718,11 @@ GROUP BY
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>Question</name>
-        <length>500</length>
+        <name>Client_Family_Name</name>
+        <length>50</length>
         <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>Question</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>Question_Date</name>
-        <length>0</length>
-        <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>Question_Date</comments>
+        <origin>Table input</origin>
+        <comments>Client_Family_Name</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -969,11 +741,11 @@ GROUP BY
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>Answer</name>
-        <length>500</length>
+        <name>Client_Telephone</name>
+        <length>255</length>
         <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>Answer</comments>
+        <origin>Table input</origin>
+        <comments>Client_Telephone</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -990,36 +762,13 @@ GROUP BY
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>Qualification</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>Qualification</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>Answer_Date</name>
-        <length>0</length>
+        <name>Client_Email</name>
+        <length>255</length>
         <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>Answer_Date</comments>
+        <origin>Table input</origin>
+        <comments>Client_Email</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1036,13 +785,13 @@ GROUP BY
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Timestamp</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>First_Question_Date</name>
-        <length>0</length>
+        <name>User_Id</name>
+        <length>255</length>
         <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>First_Question_Date</comments>
+        <origin>Table input</origin>
+        <comments>User_Id</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1059,129 +808,14 @@ GROUP BY
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Timestamp</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>Last_Question_Date</name>
-        <length>0</length>
+        <name>User_Agent</name>
+        <length>255</length>
         <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>Last_Question_Date</comments>
+        <origin>Table input</origin>
+        <comments>User_Agent</comments>
         <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Question_Date_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>Question_Date_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Answer_Date_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>Answer_Date_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Status_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>Status_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Location_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>Location_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Organization_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>Organization_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -1206,8 +840,115 @@ GROUP BY
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>208</yloc>
+      <xloc>376</xloc>
+      <yloc>246</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Update</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>sqlserver</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>Y</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>BI_DW</schema>
+      <table>Dim_Client</table>
+      <key>
+        <name>Client_Id</name>
+        <field>SK_Dim_Client</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>SK_Dim_Client</name>
+        <rename>Client_Id</rename>
+      </value>
+      <value>
+        <name>Client_Name</name>
+        <rename>Client_Name</rename>
+      </value>
+      <value>
+        <name>Client_Family_Name</name>
+        <rename>Client_Family_Name</rename>
+      </value>
+      <value>
+        <name>Client_Telephone</name>
+        <rename>Client_Telephone</rename>
+      </value>
+      <value>
+        <name>Client_Email</name>
+        <rename>Client_Email</rename>
+      </value>
+      <value>
+        <name>User_Id</name>
+        <rename>User_Id</rename>
+      </value>
+      <value>
+        <name>User_Agent</name>
+        <rename>User_Agent</rename>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>568</xloc>
+      <yloc>246</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Execute SQL script </name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>sqlserver</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>delete from BI_DW.Dim_Client</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
