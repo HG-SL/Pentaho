@@ -625,6 +625,12 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>Order_Date</name>
+        <field>Order_Date</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>FK_Product_Id</name>
         <rename>Product_Id</rename>
@@ -675,6 +681,11 @@
         <rename>Organization_Id</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>Order_Date</name>
+        <rename>Order_Date</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -704,8 +715,8 @@
     <connection>sqlserver</connection>
     <sql>SELECT 
 	prd.Product_Id,
-	cl.Client_Id,
-	cl.FK_Organization_Id AS Organization_Id,
+	bic.Client_Id,
+	bic.FK_Organization_Id AS Organization_Id,
 	op.Order_Date,
 	op.Total_Amount,
 	contract.Contract_Description,
@@ -717,9 +728,12 @@
 	lct.SK_Dim_Location AS Location_Id
 FROM 
 	BI.Order_Product op 
-INNER JOIN BI.Client cl
+INNER JOIN BI_DW.Dim_Client cl
 ON 
-	cl.Client_Id = op.FK_Client_Id 
+	cl.SK_Dim_Client = op.FK_Client_Id 
+INNER JOIN BI.Client bic
+ON
+	bic.Client_Id = cl.SK_Dim_Client
 INNER JOIN BI_DW.Dim_Time Order_date 
 ON 
 	convert(date,op.Order_Date,102) = Order_date.Full_Date 
@@ -728,7 +742,7 @@ ON
 	op.FK_Status_Id = st.SK_Dim_Status
 INNER JOIN BI_DW.Dim_Location lct
 ON 
-	lct.FK_City = cl.FK_City_Id
+	lct.FK_City = bic.FK_City_Id
 INNER JOIN BI.State ste
 ON 
 	ste.State_Id = lct.FK_State
@@ -740,11 +754,11 @@ ON
 	prd.Product_Id = op.FK_Product_Id
 INNER JOIN BI.Contract contract
 ON 
-	contract.FK_Client_Id = cl.Client_Id
+	contract.FK_Client_Id = bic.Client_Id
 GROUP BY 
 	prd.Product_Id,
-	cl.Client_Id,
-	cl.FK_Organization_Id,
+	bic.Client_Id,
+	bic.FK_Organization_Id,
 	op.Order_Id,
 	op.Order_Date,
 	op.Total_Amount,

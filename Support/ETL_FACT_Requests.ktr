@@ -502,7 +502,7 @@
     <hop>
       <from>Execute SQL script 2</from>
       <to>Table input 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Table input 2</from>
@@ -596,7 +596,7 @@
         <name2/>
       </key>
       <key>
-        <name>Client_Id</name>
+        <name>Answer_Date_Id</name>
         <field>FK_Response_Time</field>
         <condition>=</condition>
         <name2/>
@@ -652,6 +652,18 @@
       <key>
         <name>Last_Question_Date</name>
         <field>Last_Question_Date</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>Channel</name>
+        <field>Channel</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>Flow</name>
+        <field>Flow</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -730,6 +742,16 @@
         <rename>Answer_Date</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>Channel</name>
+        <rename>Channel</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Flow</name>
+        <rename>Flow</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -758,11 +780,13 @@
     </partitioning>
     <connection>sqlserver</connection>
     <sql>SELECT 
-	prd.Product_Id,
-	cl.Client_Id,
+	prd.SK_Dim_Product AS Product_Id,
+	cl.SK_Dim_Client AS Client_Id,
 	qt.Question_Type,
 	qt.Question, 
 	qt.Question_Date, 
+	qt.Channel,
+	qt.Flow,
 	aw.Result As Answer,
 	aw.Qualification,
 	aw.Answer_Date,
@@ -778,7 +802,9 @@ FROM
 		Question_Id,
 		Question, 
 		Question_Date, 
-		Question_Type, 
+		Question_Type,
+		Channel, 
+		Flow,
 		FK_Status_Id,
 		FK_Client_Id,
 		FK_Product_Id
@@ -789,7 +815,9 @@ FROM
 		Question_Id,
 		Question, 
 		Question_Date, 
-		Question_Type, 
+		Question_Type,
+		Channel,
+		Flow, 
 		FK_Status_Id,
 		FK_Client_Id,
 		FK_Product_Id
@@ -808,12 +836,15 @@ ON
 INNER JOIN BI_DW.Dim_Status st
 ON 
 	qt.FK_Status_Id = st.SK_Dim_Status
-INNER JOIN BI.Client cl
+INNER JOIN BI_DW.Dim_Client cl
 ON 
-	qt.FK_Client_Id = cl.Client_Id
+	qt.FK_Client_Id = cl.SK_Dim_Client
+INNER JOIN BI.Client bic
+ON
+	bic.Client_Id = cl.SK_Dim_Client
 INNER JOIN BI_DW.Dim_Location lct
 ON 
-	lct.FK_City = cl.FK_City_Id
+	lct.FK_City = bic.FK_City_Id
 INNER JOIN BI.State ste
 ON 
 	ste.State_Id = lct.FK_State
@@ -822,13 +853,13 @@ ON
 	cty.Country_Id = lct.FK_Country
 INNER JOIN BI.Organization org
 ON 
-	org.Organization_Id = cl.FK_Organization_Id
-INNER JOIN BI.Product prd
+	org.Organization_Id = bic.FK_Organization_Id
+INNER JOIN BI_DW.Dim_Product prd
 ON 
-	prd.Product_Id = qt.FK_Product_Id
+	prd.SK_Dim_Product = qt.FK_Product_Id
 GROUP BY 
-	prd.Product_Id,
-	cl.Client_Id, 
+	prd.SK_Dim_Product,
+	cl.SK_Dim_Client, 
 	qt.Question_Type,
 	aw.Qualification, 
 	qt.Question,  
@@ -836,11 +867,13 @@ GROUP BY
 	aw.Qualification,
 	qt.Question_Date, 
 	aw.Answer_Date,
+	qt.Channel,
 	question_date.Sk_Dim_Time,
 	answer_date.Sk_Dim_Time,
 	st.SK_Dim_Status,
 	lct.SK_Dim_Location,
-	org.Organization_Id</sql>
+	org.Organization_Id,
+	qt.Flow</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -854,7 +887,7 @@ GROUP BY
         <name>Product_Id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Product_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -877,7 +910,7 @@ GROUP BY
         <name>Client_Id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Client_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -900,7 +933,7 @@ GROUP BY
         <name>Question_Type</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Question_Type</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -923,8 +956,54 @@ GROUP BY
         <name>Question</name>
         <length>500</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Question</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>Question_Date</name>
+        <length>0</length>
+        <precision>-1</precision>
+        <origin>Table input 2</origin>
+        <comments>Question_Date</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>Channel</name>
+        <length>100</length>
+        <precision>-1</precision>
+        <origin>Table input 2</origin>
+        <comments>Channel</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -946,7 +1025,7 @@ GROUP BY
         <name>Answer</name>
         <length>500</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Answer</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -969,9 +1048,32 @@ GROUP BY
         <name>Qualification</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Qualification</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>Answer_Date</name>
+        <length>0</length>
+        <precision>-1</precision>
+        <origin>Table input 2</origin>
+        <comments>Answer_Date</comments>
+        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -992,7 +1094,7 @@ GROUP BY
         <name>First_Question_Date</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>First_Question_Date</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1015,7 +1117,7 @@ GROUP BY
         <name>Last_Question_Date</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Last_Question_Date</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1038,7 +1140,7 @@ GROUP BY
         <name>Question_Date_Id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Question_Date_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1061,7 +1163,7 @@ GROUP BY
         <name>Answer_Date_Id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Answer_Date_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1084,7 +1186,7 @@ GROUP BY
         <name>Status_Id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Status_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1107,7 +1209,7 @@ GROUP BY
         <name>Location_Id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Location_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1130,7 +1232,7 @@ GROUP BY
         <name>Organization_Id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input 2</origin>
         <comments>Organization_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
