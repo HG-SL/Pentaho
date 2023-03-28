@@ -625,6 +625,12 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>Order_Date</name>
+        <field>Order_Date</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>FK_Product_Id</name>
         <rename>Product_Id</rename>
@@ -673,6 +679,11 @@
       <value>
         <name>FK_Organization_Id</name>
         <rename>Organization_Id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Order_Date</name>
+        <rename>Order_Date</rename>
         <update>Y</update>
       </value>
     </lookup>
