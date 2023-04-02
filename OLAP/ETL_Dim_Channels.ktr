@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Fact_Failure_Requests</name>
+    <name>ETL_Dim_Channels</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -427,10 +428,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2023/03/09 18:25:22.720</created_date>
+    <created_date>2023/04/01 21:07:35.015</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2023/03/09 18:25:22.720</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2023/04/01 21:07:35.015</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -501,53 +502,15 @@
   <order>
     <hop>
       <from>Table input</from>
-      <to>Insert / update</to>
+      <to>Update</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Execute SQL script</from>
-      <to>Table input</to>
+      <from>Update</from>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name>Execute SQL script</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>sqlserver</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DELETE FROM BI_DM.Fact_Failure_Requests;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Insert / update</name>
     <type>InsertUpdate</type>
@@ -563,101 +526,17 @@
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>BI_DM</schema>
-      <table>Fact_Failure_Requests</table>
+      <schema>BI_DW</schema>
+      <table>Dim_Channels</table>
       <key>
         <name>Question_Id</name>
-        <field>Question_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Question</name>
-        <field>Question</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Question_Date</name>
-        <field>Question_Date</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Question_Type</name>
-        <field>Question_Type</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>FK_Client_Id</name>
-        <field>FK_Client_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>FK_Product_Id</name>
-        <field>FK_Product_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>FK_Status_Id</name>
-        <field>FK_Status_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Channel</name>
-        <field>Channel</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Flow</name>
-        <field>Flow</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Open_Ticket</name>
-        <field>Open_Ticket</field>
+        <field>SK_Dim_Channel</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>Question_Id</name>
+        <name>SK_Dim_Channel</name>
         <rename>Question_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Question</name>
-        <rename>Question</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Question_Date</name>
-        <rename>Question_Date</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Question_Type</name>
-        <rename>Question_Type</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Client_Id</name>
-        <rename>FK_Client_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Product_Id</name>
-        <rename>FK_Product_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Status_Id</name>
-        <rename>FK_Status_Id</rename>
         <update>Y</update>
       </value>
       <value>
@@ -670,11 +549,6 @@
         <rename>Flow</rename>
         <update>Y</update>
       </value>
-      <value>
-        <name>Open_Ticket</name>
-        <rename>Open_Ticket</rename>
-        <update>Y</update>
-      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -685,8 +559,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>224</yloc>
+      <xloc>617</xloc>
+      <yloc>239</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -704,26 +578,10 @@
     <connection>sqlserver</connection>
     <sql>SELECT 
 	qt.Question_Id,
-	qt.Description AS Question, 
-	qt.Question_Date, 
-	qt.Question_Type,
 	qt.Channel,
-	qt.Flow,
-	qt.Open_Ticket,
-	qt.FK_Client_Id,
-	qt.FK_Product_Id,
-	qt.FK_Status_Id
+	qt.Flow
 FROM 
-	BI.Question qt
-INNER JOIN BI_DW.Dim_Status st 
-ON 
-	qt.FK_Status_Id = st.SK_Dim_Status 
-INNER JOIN BI_DW.Dim_Client cli 
-ON 
-	qt.FK_Client_Id = cli.SK_Dim_Client 
-WHERE 
-	qt.Question_Type = 'Failure' AND
-	qt.Flow = 'Support'</sql>
+	BI.Question qt</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -740,75 +598,6 @@ WHERE
         <origin>Table input</origin>
         <comments>Question_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>Question</name>
-        <length>500</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>Question</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>Question_Date</name>
-        <length>0</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>Question_Date</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>Question_Type</name>
-        <length>50</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>Question_Type</comments>
-        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -869,75 +658,6 @@ WHERE
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>FK_Client_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>FK_Client_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>FK_Product_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>FK_Product_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>FK_Status_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>FK_Status_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -948,8 +668,61 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>224</yloc>
+      <xloc>233</xloc>
+      <yloc>239</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Update</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>sqlserver</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>Y</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>BI_DW</schema>
+      <table>Dim_Channels</table>
+      <key>
+        <name>Question_Id</name>
+        <field>SK_Dim_Channel</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>SK_Dim_Channel</name>
+        <rename>Question_Id</rename>
+      </value>
+      <value>
+        <name>Channel</name>
+        <rename>Channel</rename>
+      </value>
+      <value>
+        <name>Flow</name>
+        <rename>Flow</rename>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>425</xloc>
+      <yloc>239</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

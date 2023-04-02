@@ -619,6 +619,12 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>Open_Ticket</name>
+        <field>Open_Ticket</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>Question_Id</name>
         <rename>Question_Id</rename>
@@ -664,6 +670,11 @@
         <rename>Flow</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>Open_Ticket</name>
+        <rename>Open_Ticket</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -698,6 +709,7 @@
 	qt.Question_Type,
 	qt.Channel,
 	qt.Flow,
+	qt.Open_Ticket,
 	qt.FK_Client_Id,
 	qt.FK_Product_Id,
 	qt.FK_Status_Id

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ETL_FACT_Requests</name>
+    <name>ETL_Fact_All_Requests</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -427,10 +428,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/11/28 18:54:56.234</created_date>
+    <created_date>2023/04/01 21:08:24.708</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/11/28 18:54:56.234</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2023/04/01 21:08:24.708</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -500,54 +501,11 @@
   </connection>
   <order>
     <hop>
-      <from>Execute SQL script 2</from>
-      <to>Table input 2</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
       <from>Table input 2</from>
       <to>Insert / update 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name>Execute SQL script 2</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>sqlserver</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DELETE FROM BI_DW.Fact_Requests </sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Insert / update 2</name>
     <type>InsertUpdate</type>
@@ -564,7 +522,19 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>BI_DW</schema>
-      <table>Fact_Requests</table>
+      <table>Fact_All_Requests</table>
+      <key>
+        <name>Product_Id</name>
+        <field>FK_Product_Id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>Client_Id</name>
+        <field>FK_Client_Id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <key>
         <name>Question_Type</name>
         <field>Question_Type</field>
@@ -578,38 +548,14 @@
         <name2/>
       </key>
       <key>
-        <name>Answer</name>
-        <field>Response</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Qualification</name>
-        <field>Qualification</field>
+        <name>Question_Date</name>
+        <field>Question_Date</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
         <name>Question_Date_Id</name>
         <field>FK_Question_Time</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Answer_Date_Id</name>
-        <field>FK_Response_Time</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Status_Id</name>
-        <field>FK_Status_Id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Client_Id</name>
-        <field>FK_Client_Id</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -626,53 +572,21 @@
         <name2/>
       </key>
       <key>
-        <name>Product_Id</name>
-        <field>FK_Product_Id</field>
+        <name>Channel_Id</name>
+        <field>FK_Channel</field>
         <condition>=</condition>
         <name2/>
       </key>
-      <key>
-        <name>Question_Date</name>
-        <field>Question_Date</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Answer_Date</name>
-        <field>Answer_Date</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>First_Question_Date</name>
-        <field>First_Question_Date</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Last_Question_Date</name>
-        <field>Last_Question_Date</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Channel</name>
-        <field>Channel</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Flow</name>
-        <field>Flow</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Open_Ticket</name>
-        <field>Open_Ticket</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
+      <value>
+        <name>FK_Product_Id</name>
+        <rename>Product_Id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FK_Client_Id</name>
+        <rename>Client_Id</rename>
+        <update>Y</update>
+      </value>
       <value>
         <name>Question_Type</name>
         <rename>Question_Type</rename>
@@ -684,33 +598,13 @@
         <update>Y</update>
       </value>
       <value>
-        <name>Response</name>
-        <rename>Answer</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Qualification</name>
-        <rename>Qualification</rename>
+        <name>Question_Date</name>
+        <rename>Question_Date</rename>
         <update>Y</update>
       </value>
       <value>
         <name>FK_Question_Time</name>
         <rename>Question_Date_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Response_Time</name>
-        <rename>Answer_Date_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Status_Id</name>
-        <rename>Status_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_Client_Id</name>
-        <rename>Client_Id</rename>
         <update>Y</update>
       </value>
       <value>
@@ -724,43 +618,8 @@
         <update>Y</update>
       </value>
       <value>
-        <name>FK_Product_Id</name>
-        <rename>Product_Id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>First_Question_Date</name>
-        <rename>First_Question_Date</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Last_Question_Date</name>
-        <rename>Last_Question_Date</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Question_Date</name>
-        <rename>Question_Date</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Answer_Date</name>
-        <rename>Answer_Date</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Channel</name>
-        <rename>Channel</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Flow</name>
-        <rename>Flow</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Open_Ticket</name>
-        <rename>Open_Ticket</rename>
+        <name>FK_Channel</name>
+        <rename>Channel_Id</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -773,8 +632,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>208</yloc>
+      <xloc>604</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -794,62 +653,16 @@
 	prd.SK_Dim_Product AS Product_Id,
 	cl.SK_Dim_Client AS Client_Id,
 	qt.Question_Type,
-	qt.Question, 
+	qt.Description AS Question, 
 	qt.Question_Date, 
-	qt.Channel,
-	qt.Flow,
-	qt.Open_Ticket,
-	aw.Result As Answer,
-	aw.Qualification,
-	aw.Answer_Date,
-	MIN(qt.Question_Date) AS First_Question_Date,
-	MAX(qt.Question_Date) AS Last_Question_Date,
 	question_date.Sk_Dim_Time as Question_Date_Id,
-	answer_date.Sk_Dim_Time as Answer_Date_Id,
-	st.SK_Dim_Status as Status_Id,
 	lct.SK_Dim_Location AS Location_Id,
-	org.Organization_Id
-FROM 
-	(SELECT 
-		Question_Id,
-		Question, 
-		Question_Date, 
-		Question_Type,
-		Channel, 
-		Flow,
-		Open_Ticket,
-		FK_Status_Id,
-		FK_Client_Id,
-		FK_Product_Id
-	FROM 
-		BI_DM.Fact_Failure_Requests
-	UNION
-	SELECT 
-		Question_Id,
-		Question, 
-		Question_Date, 
-		Question_Type,
-		Channel,
-		Flow, 
-		Open_Ticket,
-		FK_Status_Id,
-		FK_Client_Id,
-		FK_Product_Id
-	FROM 
-		BI_DM.Fact_Knowledge_Requests
-	) AS qt 
-INNER JOIN BI.Answer aw 
-ON 
-	qt.Question_Id = aw.FK_Question_Id 
+	org.Organization_Id,
+	ch.SK_Dim_Channel AS Channel_Id
+FROM BI.Question qt
 INNER JOIN BI_DW.Dim_Time question_date 
 ON 
 	convert(date,qt.Question_Date,102) = question_date.Full_Date 
-INNER JOIN BI_DW.Dim_Time answer_date 
-ON 
-	convert(date,aw.Answer_Date,102) = answer_date.Full_Date 
-INNER JOIN BI_DW.Dim_Status st
-ON 
-	qt.FK_Status_Id = st.SK_Dim_Status
 INNER JOIN BI_DW.Dim_Client cl
 ON 
 	qt.FK_Client_Id = cl.SK_Dim_Client
@@ -871,24 +684,20 @@ ON
 INNER JOIN BI_DW.Dim_Product prd
 ON 
 	prd.SK_Dim_Product = qt.FK_Product_Id
+INNER JOIN BI_DW.Dim_Channels ch
+ON 
+	ch.SK_Dim_Channel = qt.Question_Id
 GROUP BY 
 	prd.SK_Dim_Product,
 	cl.SK_Dim_Client, 
 	qt.Question_Type,
-	aw.Qualification, 
-	qt.Question,  
-	aw.Result,
-	aw.Qualification,
+	qt.Description,  
 	qt.Question_Date, 
-	aw.Answer_Date,
-	qt.Channel,
 	question_date.Sk_Dim_Time,
-	answer_date.Sk_Dim_Time,
-	st.SK_Dim_Status,
 	lct.SK_Dim_Location,
 	org.Organization_Id,
-	qt.Open_Ticket,
-	qt.Flow</sql>
+	ch.SK_Dim_Channel
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1012,167 +821,6 @@ GROUP BY
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>Channel</name>
-        <length>100</length>
-        <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>Channel</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>Flow</name>
-        <length>50</length>
-        <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>Flow</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>Answer</name>
-        <length>500</length>
-        <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>Answer</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Qualification</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>Qualification</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>Answer_Date</name>
-        <length>0</length>
-        <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>Answer_Date</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>First_Question_Date</name>
-        <length>0</length>
-        <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>First_Question_Date</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>Last_Question_Date</name>
-        <length>0</length>
-        <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>Last_Question_Date</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>Question_Date_Id</name>
@@ -1180,52 +828,6 @@ GROUP BY
         <precision>0</precision>
         <origin>Table input 2</origin>
         <comments>Question_Date_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Answer_Date_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>Answer_Date_Id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>Status_Id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>Status_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1287,6 +889,29 @@ GROUP BY
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>Channel_Id</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table input 2</origin>
+        <comments>Channel_Id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -1297,8 +922,8 @@ GROUP BY
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>208</yloc>
+      <xloc>364</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
