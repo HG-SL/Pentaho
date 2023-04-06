@@ -625,6 +625,12 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>Session_Completed</name>
+        <field>Session_Completed</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>Question_Id</name>
         <rename>Question_Id</rename>
@@ -675,6 +681,11 @@
         <rename>Open_Ticket</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>Session_Completed</name>
+        <rename>Session_Completed</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -710,6 +721,7 @@
 	qt.Channel,
 	qt.Flow,
 	qt.Open_Ticket,
+	qt.Session_Completed,
 	qt.FK_Client_Id,
 	qt.FK_Product_Id,
 	qt.FK_Status_Id
@@ -855,6 +867,29 @@ WHERE
         <origin>Table input</origin>
         <comments>Flow</comments>
         <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>Open_Ticket</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>Open_Ticket</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
