@@ -631,6 +631,12 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>End_Use_Time</name>
+        <field>End_Use_Time</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>Question_Id</name>
         <rename>Question_Id</rename>
@@ -686,6 +692,11 @@
         <rename>Session_Completed</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>End_Use_Time</name>
+        <rename>End_Use_Time</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -722,6 +733,7 @@
 	qt.Flow,
 	qt.Open_Ticket,
 	qt.Session_Completed,
+	qt.End_Use_Time,
 	qt.FK_Client_Id,
 	qt.FK_Product_Id,
 	qt.FK_Status_Id
@@ -890,6 +902,52 @@ WHERE
         <origin>Table input</origin>
         <comments>Open_Ticket</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>Session_Completed</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>Session_Completed</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>End_Use_Time</name>
+        <length>0</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>End_Use_Time</comments>
+        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
