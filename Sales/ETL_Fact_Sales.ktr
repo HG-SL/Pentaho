@@ -442,15 +442,15 @@
     <access>Native</access>
     <database>SL_Business_Intelligence</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>SLV2</username>
+    <password>Encrypted 2be98afc86aa79dd6bd0baa7888a8b7ee</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
       <attribute>
         <code>EXTRA_OPTION_MSSQLNATIVE.instance</code>
-        <attribute>DESKTOP-T1925OG</attribute>
+        <attribute>ID97389</attribute>
       </attribute>
       <attribute>
         <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
@@ -584,12 +584,6 @@
         <name2/>
       </key>
       <key>
-        <name>Contract_Description</name>
-        <field>Contract_Description</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
         <name>Promo_Id</name>
         <field>FK_Promotion_Id</field>
         <condition>=</condition>
@@ -644,11 +638,6 @@
       <value>
         <name>Total_Amount</name>
         <rename>Total_Amount</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Contract_Description</name>
-        <rename>Contract_Description</rename>
         <update>Y</update>
       </value>
       <value>
@@ -719,7 +708,6 @@
 	bic.FK_Organization_Id AS Organization_Id,
 	op.Order_Date,
 	op.Total_Amount,
-	contract.Contract_Description,
 	op.Order_Id AS Order_number,
 	prd.FK_Promo_Id AS Promo_Id,
 	COUNT(op.FK_Product_Id) AS Quantity_Products,
@@ -752,9 +740,6 @@ ON
 INNER JOIN BI.Product prd
 ON 
 	prd.Product_Id = op.FK_Product_Id
-INNER JOIN BI.Contract contract
-ON 
-	contract.FK_Client_Id = bic.Client_Id
 GROUP BY 
 	prd.Product_Id,
 	bic.Client_Id,
@@ -762,7 +747,6 @@ GROUP BY
 	op.Order_Id,
 	op.Order_Date,
 	op.Total_Amount,
-	contract.Contract_Description,
 	Order_date.Sk_Dim_Time,
 	st.SK_Dim_Status,
 	lct.SK_Dim_Location,
@@ -793,8 +777,8 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -816,8 +800,8 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -839,8 +823,8 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -862,21 +846,21 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>BigNumber</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
         <name>Total_Amount</name>
-        <length>19</length>
-        <precision>4</precision>
+        <length>255</length>
+        <precision>-1</precision>
         <origin>Table input</origin>
         <comments>Total_Amount</comments>
-        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
+        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol/>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -885,8 +869,8 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -908,8 +892,8 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -931,8 +915,8 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -954,8 +938,8 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -977,8 +961,8 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -1000,8 +984,8 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -1023,8 +1007,8 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -1046,8 +1030,8 @@ GROUP BY
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
     </row-meta>
