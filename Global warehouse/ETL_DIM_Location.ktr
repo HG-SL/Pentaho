@@ -442,15 +442,15 @@
     <access>Native</access>
     <database>SL_Business_Intelligence</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>SLV2</username>
+    <password>Encrypted 2be98afc86aa79dd6bd0baa7888a8b7ee</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
       <attribute>
         <code>EXTRA_OPTION_MSSQLNATIVE.instance</code>
-        <attribute>DESKTOP-T1925OG</attribute>
+        <attribute>ID97389</attribute>
       </attribute>
       <attribute>
         <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
@@ -632,7 +632,7 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <name>Country_Name</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>Location</origin>
         <comments>Country_Name</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -645,8 +645,8 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -655,7 +655,7 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <name>State_Name</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>Location</origin>
         <comments>State_Name</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -668,8 +668,8 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -678,7 +678,7 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <name>City_Name</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>Location</origin>
         <comments>City_Name</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -691,8 +691,8 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -701,7 +701,7 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <name>Country_Id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Location</origin>
         <comments>Country_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -714,8 +714,8 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -724,7 +724,7 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <name>State_Id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Location</origin>
         <comments>State_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -737,8 +737,8 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -747,7 +747,7 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <name>City_Id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Location</origin>
         <comments>City_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -760,8 +760,8 @@ INNER JOIN BI.City cty ON st.State_Id = cty.FK_State_Id</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
     </row-meta>

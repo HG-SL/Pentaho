@@ -293,7 +293,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Support/ETL_DIM_Client.ktr</filename>
+      <filename>D:/inetpub/Pentaho/Support/ETL_DIM_Client.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -332,7 +332,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Support/ETL_DIM_Product.ktr</filename>
+      <filename>D:/inetpub/Pentaho/Support/ETL_DIM_Product.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -371,7 +371,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Data Mart/Fact_Zendesk_Solutions.ktr</filename>
+      <filename>${Internal.Entry.Current.Directory}/Fact_Zendesk_Solutions.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>

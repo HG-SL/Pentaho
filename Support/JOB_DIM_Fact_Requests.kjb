@@ -18,15 +18,15 @@
     <access>Native</access>
     <database>SL_Business_Intelligence</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>SLV2</username>
+    <password>Encrypted 2be98afc86aa79dd6bd0baa7888a8b7ee</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
       <attribute>
         <code>EXTRA_OPTION_MSSQLNATIVE.instance</code>
-        <attribute>DESKTOP-T1925OG</attribute>
+        <attribute>ID97389</attribute>
       </attribute>
       <attribute>
         <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
@@ -417,7 +417,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_TIEMPO.ktr</filename>
+      <filename>D:/inetpub/Pentaho/Global warehouse/ETL_DIM_TIEMPO.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -507,7 +507,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_Department.ktr</filename>
+      <filename>D:/inetpub/Pentaho/Global warehouse/ETL_DIM_Department.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -546,7 +546,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/ETL_DIM_Employee.ktr</filename>
+      <filename>D:/inetpub/Pentaho/Global warehouse/ETL_DIM_Employee.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -585,7 +585,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_Location.ktr</filename>
+      <filename>D:/inetpub/Pentaho/Global warehouse/ETL_DIM_Location.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -624,7 +624,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_Organization.ktr</filename>
+      <filename>D:/inetpub/Pentaho/Global warehouse/ETL_DIM_Organization.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -702,7 +702,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Global warehouse/ETL_DIM_Status.ktr</filename>
+      <filename>D:/inetpub/Pentaho/Global warehouse/ETL_DIM_Status.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -814,7 +814,7 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Data Mart/Fact_Failure_Requests.ktr</filename>
+      <filename>D:/inetpub/Pentaho/Data Mart/Fact_Failure_Requests.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -853,7 +853,7 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:/Users/User/Desktop/Shocklogic/Angular/Degree work/Pentaho/Data Mart/Fact_Knowledge_Requests.ktr</filename>
+      <filename>D:/inetpub/Pentaho/Data Mart/Fact_Knowledge_Requests.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
