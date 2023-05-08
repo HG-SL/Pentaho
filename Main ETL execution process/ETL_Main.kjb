@@ -562,8 +562,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>544</yloc>
+      <xloc>144</xloc>
+      <yloc>432</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -601,7 +601,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
+      <xloc>144</xloc>
       <yloc>544</yloc>
       <attributes_kjc/>
     </entry>
@@ -640,7 +640,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>816</xloc>
+      <xloc>784</xloc>
       <yloc>544</yloc>
       <attributes_kjc/>
     </entry>
@@ -679,7 +679,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
+      <xloc>528</xloc>
       <yloc>544</yloc>
       <attributes_kjc/>
     </entry>
@@ -712,12 +712,12 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
+      <xloc>128</xloc>
       <yloc>800</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>Fact support requests</name>
+      <name>Fact Support Requests</name>
       <description/>
       <type>JOB</type>
       <attributes/>
@@ -907,6 +907,84 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;</sql>
       <yloc>800</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>Dim Channels</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>D:/inetpub/Pentaho/OLAP/ETL_Dim_Channels.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>432</xloc>
+      <yloc>800</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Fact All Requests</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>D:/inetpub/Pentaho/OLAP/ETL_Fact_All_Requests.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>272</xloc>
+      <yloc>800</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1001,7 +1079,7 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;</sql>
     </hop>
     <hop>
       <from>Client data mart</from>
-      <to>Fact support requests</to>
+      <to>Fact Support Requests</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1009,7 +1087,7 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;</sql>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Fact support requests</from>
+      <from>Fact Support Requests</from>
       <to>Dim Promo</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1037,6 +1115,24 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;</sql>
     </hop>
     <hop>
       <from>Fact sales </from>
+      <to>Dim Channels</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Dim Channels</from>
+      <to>Fact All Requests</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Fact All Requests</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
