@@ -577,8 +577,33 @@
         <update>Y</update>
       </value>
       <value>
+        <name>Client_Name</name>
+        <rename>Client_Name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Client_Family_Name</name>
+        <rename>Client_Family_Name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Client_Telephone</name>
+        <rename>Client_Telephone</rename>
+        <update>Y</update>
+      </value>
+      <value>
         <name>Client_Email</name>
         <rename>Client_Email</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>User_Id</name>
+        <rename>User_Id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>User_Agent</name>
+        <rename>User_Agent</rename>
         <update>Y</update>
       </value>
       <value>
@@ -592,13 +617,13 @@
         <update>Y</update>
       </value>
       <value>
-        <name>FK_Order_Id</name>
-        <rename>Order_Id</rename>
+        <name>FK_Location_Id</name>
+        <rename>Sk_Dim_Location</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>FK_Location_Id</name>
-        <rename>Sk_Dim_Location</rename>
+        <name>FK_Question_Id</name>
+        <rename>Question_Id</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -630,14 +655,19 @@
     <connection>sqlserver</connection>
     <sql>SELECT  
 	cli.Client_Id, 
-	cli.Client_Email, 
-	cli.Potential_Customer, 
+	cli.Client_Name,
+    cli.Client_Family_Name, 
+    cli.Client_Telephone, 
+    cli.Client_Email,
+    cli.User_Id,
+    cli.User_Agent,
+    cli.Potential_Customer,
 	ct.Country_Name,
-	op.Order_Id,
-	lt.Sk_Dim_Location
+	lt.Sk_Dim_Location,
+	qt.Question_Id
 FROM 
 	BI.Client cli
-	INNER JOIN BI.Order_Product op ON op.FK_Client_Id = cli.Client_Id
+	INNER JOIN BI.Question qt ON qt.FK_Client_Id = cli.Client_Id
 	INNER JOIN BI_DW.Dim_Location lt ON lt.FK_City = cli.FK_City_Id
 	INNER JOIN BI.State st ON st.State_Id = lt.FK_State
 	INNER JOIN BI.Country ct ON ct.Country_Id = lt.FK_Country
@@ -645,12 +675,16 @@ WHERE
 	ct.Country_Name NOT IN ('England','Scotland','Wales','Ireland')
 GROUP BY 
 	cli.Client_Id, 
-	cli.Client_Email, 
-	cli.Potential_Customer, 
-	op.Order_Id,
+	cli.Client_Name,
+    cli.Client_Family_Name, 
+    cli.Client_Telephone, 
+    cli.Client_Email,
+    cli.User_Id,
+    cli.User_Agent,
+    cli.Potential_Customer,
 	ct.Country_Name,
-	op.Order_Id,
-	lt.Sk_Dim_Location</sql>
+	lt.Sk_Dim_Location,
+	qt.Question_Id</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -684,11 +718,126 @@ GROUP BY
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
+        <name>Client_Name</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>Client_Name</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>Client_Family_Name</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>Client_Family_Name</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>Client_Telephone</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>Client_Telephone</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
         <name>Client_Email</name>
         <length>255</length>
         <precision>-1</precision>
         <origin>Table input</origin>
         <comments>Client_Email</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>User_Id</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>User_Id</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_GB</date_format_locale>
+        <date_format_timezone>Europe/London</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>User_Agent</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>User_Agent</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -753,11 +902,11 @@ GROUP BY
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>Order_Id</name>
+        <name>Sk_Dim_Location</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Table input</origin>
-        <comments>Order_Id</comments>
+        <comments>Sk_Dim_Location</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -776,11 +925,11 @@ GROUP BY
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>Sk_Dim_Location</name>
+        <name>Question_Id</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Table input</origin>
-        <comments>Sk_Dim_Location</comments>
+        <comments>Question_Id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
