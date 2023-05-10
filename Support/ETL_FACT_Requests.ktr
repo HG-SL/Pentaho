@@ -506,61 +506,15 @@
     </hop>
     <hop>
       <from>Get minutes</from>
-      <to>Calculator</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Calculator</from>
       <to>Show values calculation</to>
       <enabled>N</enabled>
     </hop>
     <hop>
-      <from>Calculator</from>
+      <from>Get minutes</from>
       <to>Insert / update 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name>Calculator</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <failIfNoFile>Y</failIfNoFile>
-    <calculation>
-      <field_name>Minutes</field_name>
-      <calc_type>SUBTRACT</calc_type>
-      <field_a>end_time</field_a>
-      <field_b>start_time</field_b>
-      <field_c/>
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>592</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Get minutes</name>
     <type>ScriptValueMod</type>
@@ -582,8 +536,10 @@
 //var date_time = getInputRowMeta().getString(row, "Question_Hour", "");
 //var date_time_parts = date_time.split(" ");
 //var time = date_time_parts[1];
-var start_time = Question_Date.getMinutes();
-var end_time = End_Use_Time.getMinutes();</jsScript_script>
+var start_time = Question_Date.getTime();
+var end_time = End_Use_Time.getTime();
+var time_difference = Math.abs(end_time - start_time);
+var time_difference_in_minutes = time_difference / 60000;</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
@@ -591,7 +547,7 @@ var end_time = End_Use_Time.getMinutes();</jsScript_script>
         <name>start_time</name>
         <rename>start_time</rename>
         <type>Integer</type>
-        <length>9</length>
+        <length>18</length>
         <precision>0</precision>
         <replace>N</replace>
       </field>
@@ -599,8 +555,24 @@ var end_time = End_Use_Time.getMinutes();</jsScript_script>
         <name>end_time</name>
         <rename>end_time</rename>
         <type>Integer</type>
-        <length>9</length>
+        <length>18</length>
         <precision>0</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>time_difference</name>
+        <rename>time_difference</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>time_difference_in_minutes</name>
+        <rename>time_difference_in_minutes</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
         <replace>N</replace>
       </field>
     </fields>
@@ -750,7 +722,7 @@ var end_time = End_Use_Time.getMinutes();</jsScript_script>
         <name2/>
       </key>
       <key>
-        <name>Minutes</name>
+        <name>time_difference_in_minutes</name>
         <field>Use_Time</field>
         <condition>=</condition>
         <name2/>
@@ -852,7 +824,7 @@ var end_time = End_Use_Time.getMinutes();</jsScript_script>
       </value>
       <value>
         <name>Use_Time</name>
-        <rename>Minutes</rename>
+        <rename>time_difference_in_minutes</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -865,7 +837,7 @@ var end_time = End_Use_Time.getMinutes();</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>880</xloc>
+      <xloc>800</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -894,7 +866,7 @@ var end_time = End_Use_Time.getMinutes();</jsScript_script>
         <name>end_time</name>
       </field>
       <field>
-        <name>Minutes</name>
+        <name>time_difference_in_minutes</name>
       </field>
     </fields>
     <attributes/>
