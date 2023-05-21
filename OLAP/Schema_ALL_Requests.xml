@@ -1,0 +1,46 @@
+<Schema name="Schema_ALL_Requests" description="Here we will list all requests without filter">
+  <Cube name="ALL_Chatbot_Requests" visible="true" cache="true" enabled="true">
+    <Table name="Fact_All_Requests" schema="BI_DW">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="FK_Client_Id" highCardinality="false" name="Dim_Client">
+      <Hierarchy name="Hierarchy_client" visible="true" hasAll="true" primaryKey="SK_Dim_Client">
+        <Table name="Dim_Client" schema="BI_DW">
+        </Table>
+        <Level name="Level_Client" visible="true" column="Client_Email" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="FK_Location_Id" highCardinality="false" name="Dim_Location">
+      <Hierarchy name="Hierarchy_Location" visible="true" hasAll="true" primaryKey="SK_Dim_Location">
+        <Table name="Dim_Location" schema="BI_DW">
+        </Table>
+        <Level name="Level_Country" visible="true" column="Country_Name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Level_State" visible="true" column="State_Name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" visible="true" foreignKey="FK_Question_Time" highCardinality="false" name="Dim_Time">
+      <Hierarchy name="Hierarchy_Time" visible="true" hasAll="true" primaryKey="Sk_Dim_Time">
+        <Table name="Dim_Time" schema="BI_DW">
+        </Table>
+        <Level name="Level_Year" visible="true" column="Year_Name" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+        </Level>
+        <Level name="Level_Month" visible="true" column="Month_Name" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="FK_Channel" highCardinality="false" name="Dim_Channel">
+      <Hierarchy name="Hierarchy_Channel" visible="true" hasAll="true" primaryKey="SK_Dim_Channel">
+        <Table name="Dim_Channels" schema="BI_DW">
+        </Table>
+        <Level name="Level_Flow" visible="true" column="Flow" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Level_Channel" visible="true" column="Channel" nameColumn="Channel" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Count_entries" column="Question" aggregator="distinct count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
