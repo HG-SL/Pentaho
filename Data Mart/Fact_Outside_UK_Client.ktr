@@ -672,7 +672,7 @@ FROM
 	INNER JOIN BI.State st ON st.State_Id = lt.FK_State
 	INNER JOIN BI.Country ct ON ct.Country_Id = lt.FK_Country
 WHERE
-	ct.Country_Name NOT IN ('England','Scotland','Wales','Ireland')
+	ct.Country_Name NOT IN ('England','Scotland','Wales','Ireland','United Kingdom')
 GROUP BY 
 	cli.Client_Id, 
 	cli.Client_Name,
