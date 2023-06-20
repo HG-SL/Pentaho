@@ -632,7 +632,9 @@
     <connection>sqlserver</connection>
     <sql>Select pr.Product_Id, pr.Product_Name, pt.Type_Name
 From BI.Product pr 
-INNER JOIN BI.Product_Type pt ON pr.FK_Product_Type_Id = pt.Product_Type_Id</sql>
+INNER JOIN BI.Product_Type pt ON pr.FK_Product_Type_Id = pt.Product_Type_Id
+INNER JOIN BI.Question qt ON qt.FK_Product_Id = pr.Product_Id
+GROUP BY pr.Product_Id, pr.Product_Name, pt.Type_Name</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

@@ -576,30 +576,6 @@
         <condition>=</condition>
         <name2/>
       </key>
-      <key>
-        <name>Order_Date</name>
-        <field>Order_Date</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Total_Amount</name>
-        <field>Total_Amount</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Specifications</name>
-        <field>Specifications</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Status_Description</name>
-        <field>Status</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
       <value>
         <name>SK_Dim_Order</name>
         <rename>Order_Id</rename>
@@ -816,30 +792,6 @@ INNER JOIN BI.Status st ON st.Status_Id = op.FK_Status_Id</sql>
       <key>
         <name>Order_Id</name>
         <field>SK_Dim_Order</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Order_Date</name>
-        <field>Order_Date</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Total_Amount</name>
-        <field>Total_Amount</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Specifications</name>
-        <field>Specifications</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Status_Description</name>
-        <field>Status</field>
         <condition>=</condition>
         <name2/>
       </key>

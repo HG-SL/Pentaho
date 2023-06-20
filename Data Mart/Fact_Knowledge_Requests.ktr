@@ -744,7 +744,10 @@ ON
 	qt.FK_Status_Id = st.SK_Dim_Status 
 INNER JOIN BI_DW.Dim_Client cli 
 ON 
-	qt.FK_Client_Id = cli.SK_Dim_Client 
+	qt.FK_Client_Id = cli.SK_Dim_Client
+INNER JOIN BI_DW.Dim_Product pr 
+ON 
+	qt.FK_Product_Id = pr.SK_Dim_Product  
 WHERE 
 	qt.Question_Type = 'Knowledge' AND
 	qt.Flow = 'Support'</sql>
