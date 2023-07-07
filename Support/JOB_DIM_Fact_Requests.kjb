@@ -769,7 +769,7 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>Fact requests</name>
+      <name>Requests</name>
       <description/>
       <type>JOB</type>
       <attributes/>
@@ -980,7 +980,7 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;
     </hop>
     <hop>
       <from>Dim Client</from>
-      <to>Fact requests</to>
+      <to>Requests</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -988,7 +988,7 @@ Delete from BI_DW.Dim_Time where Sk_Dim_Time > 0;
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Fact requests</from>
+      <from>Requests</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
